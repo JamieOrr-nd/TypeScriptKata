@@ -16,13 +16,13 @@ export function reverseFiveLetterWords(sentence: string): string {
     let words = sentence.split(" ")
     words.forEach(word => {
         if (word.length >= 5) {
-            for(let i = (word.length - 1); i >= 0; i--) {
+            for (let i = (word.length - 1); i >= 0; i--) {
                 result += word[i]
             }
             result += " "
         } else {
-            result += (word + " ") 
-        } 
+            result += (word + " ")
+        }
     });
     return result.trim()
 }
@@ -32,21 +32,21 @@ export function toJadenCase(sentence: string): string {
     let result = sentence.split(" ").map(word => word[0].toString().toUpperCase() + (word.slice(1))).join(" ")
     return result
 }
- 
+
 // CodeWars: Roman Numerals Decoder
 export function romanNumeralsDecoder(numeral: string): number {
     const numeralLetters = ["I", "V", "X", "L", "C", "D", "M"]
     const numeralNumbers = [1, 5, 10, 50, 100, 500, 1000]
-    
+
     let currentComposite = ""
     let currentCompositeTotal = 0
     let currentTotal = 0
-    
+
     for (let i = 0; i < numeral.length; i++) {
         let currentNumeral = numeral[i]
         let numeralIndex = numeralLetters.indexOf(currentNumeral)
         let numeralNumber = numeralNumbers[numeralIndex]
-        
+
         if (currentComposite == "") {
             currentComposite = currentNumeral
             currentCompositeTotal += numeralNumber
@@ -66,7 +66,7 @@ export function romanNumeralsDecoder(numeral: string): number {
         }
     }
     currentTotal += currentCompositeTotal
-    
+
     return currentTotal
 }
 
@@ -81,7 +81,7 @@ export function romanNumeralsEncoder(number: number): string {
         500: "D",
         1000: "M",
     }
-    
+
     let numberSplit = number.toString().split('').reverse()
     let resultArray = []
 
@@ -89,11 +89,11 @@ export function romanNumeralsEncoder(number: number): string {
         let currentNumber = parseInt(numberSplit[i])
         let currentSize = 10 ** i
         if (currentNumber < 4) {
-            let currentResult = numerals[currentSize].repeat(currentNumber) 
+            let currentResult = numerals[currentSize].repeat(currentNumber)
             resultArray.push(currentResult)
         }
         else if (currentNumber == 4) {
-            let currentResult = numerals[currentSize] + numerals[currentSize * 5] 
+            let currentResult = numerals[currentSize] + numerals[currentSize * 5]
             resultArray.push(currentResult)
         }
         else if (currentNumber >= 5 && currentNumber < 9) {
@@ -105,7 +105,35 @@ export function romanNumeralsEncoder(number: number): string {
             resultArray.push(currentResult)
         }
     }
-    
-    let result = resultArray.reverse().join('') 
+
+    let result = resultArray.reverse().join('')
     return result
+}
+
+// CodeWars: Vowel Count
+export function countVowels(str: string): number {
+    let foundVowelsCount = (str.match(/[aeiou]/g))?.length
+    return foundVowelsCount === undefined ? 0 : foundVowelsCount
+}
+
+// CodeWars: ROT13
+export function rot13(str: string): string {
+    const alphabet = "abcdefghijklmnopqrstuvwxyz"
+    let result = ""
+
+    for (let i = 0; i < str.length; i++) {
+        let currentCharacter = str[i]
+        let currentCharacterLowerCase = currentCharacter.toLocaleLowerCase()
+        let lowerCase = (currentCharacterLowerCase === currentCharacter) ? true : false
+        let letterIndex = alphabet.indexOf(currentCharacterLowerCase)
+        let resultCharacter = (letterIndex > 12) ? alphabet[letterIndex - 13] : ((letterIndex > -1) ? alphabet[letterIndex + 13] : currentCharacter)
+        result += (lowerCase) ? resultCharacter : resultCharacter.toUpperCase()
+    }
+
+    return result
+}
+
+// CodeWars: Not very secure
+export function alphanumeric(string: string): boolean {
+    return (string.match(/[\W_]/) || string.length < 1) ? false : true
 }
