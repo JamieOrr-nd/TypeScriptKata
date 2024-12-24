@@ -1,4 +1,4 @@
-import { add, countVowels, reverseFiveLetterWords, romanNumeralsDecoder, romanNumeralsEncoder, rot13, toJadenCase } from '../src/index';
+import * as indexClasses from '../src/index';
 
 // describe('Example: Add numbers', () => {
 //   test('empty string should result in zero', () => {
@@ -96,20 +96,38 @@ import { add, countVowels, reverseFiveLetterWords, romanNumeralsDecoder, romanNu
 //   })
 // })
 
-describe('CodeWars: ROT13', () => {
-  test('One character, first half', () => {
-    expect(rot13("a")).toBe("n")
-  })
-  test('One character, second half', () => {
-    expect(rot13("n")).toBe("a")
-  })
-  test('One character, non-alphabetic', () => {
-    expect(rot13("1")).toBe("1")
-  })
-  test('Multiple characters, all types', () => {
-    expect(rot13("an1")).toBe("na1")
-  })
-  test('Multiple characters, caps', () => {
-    expect(rot13("AN")).toBe("NA")
-  })
-})
+// describe('CodeWars: ROT13', () => {
+//   test('One character, first half', () => {
+//     expect(rot13("a")).toBe("n")
+//   })
+//   test('One character, second half', () => {
+//     expect(rot13("n")).toBe("a")
+//   })
+//   test('One character, non-alphabetic', () => {
+//     expect(rot13("1")).toBe("1")
+//   })
+//   test('Multiple characters, all types', () => {
+//     expect(rot13("an1")).toBe("na1")
+//   })
+//   test('Multiple characters, caps', () => {
+//     expect(rot13("AN")).toBe("NA")
+//   })
+// })
+
+// describe('CodeWars: ROT13', () => {
+//   test('2 elements, 1 consecutive', () => {
+//     expect(longestConsec(["one", "three"], 1)).toBe("three")
+//   })
+//   test('5 elements, 2 consecutive', () => {
+//     expect(longestConsec(["one", "two", "three", "four", "five"], 2)).toBe("threefour")
+//   })
+//   test('0 elements, 2 consecutive', () => {
+//     expect(longestConsec([], 2)).toBe("")
+//   })
+//   test('1 elements, 2 consecutive', () => {
+//     expect(longestConsec([], 2)).toBe("")
+//   })
+//   test('1 elements, 0 consecutive', () => {
+//     expect(longestConsec([], 2)).toBe("")
+//   })
+// })

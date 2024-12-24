@@ -137,3 +137,19 @@ export function rot13(str: string): string {
 export function alphanumeric(string: string): boolean {
     return (string.match(/[\W_]/) || string.length < 1) ? false : true
 }
+
+// CodeWars: consecutive strings
+export function longestConsec(strarr: string[], k: number): string {
+    const strArrLength = strarr.length
+    let result = ""
+    if (strArrLength < 1 || strArrLength < k || k < 1) {
+        return result
+    }
+    
+    for (let i = 0; i < (strarr.length - k + 1); i++) {
+        let currentIteration = strarr.slice(i, i + k).join("")
+        result = (currentIteration.length > result.length) ? currentIteration : result
+    }
+    
+    return result
+}
