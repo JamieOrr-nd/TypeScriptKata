@@ -8,7 +8,7 @@ import * as aocCode from "../src/aocIndex"
 //   })
 //   test('Real File (0 as placeholder)', () => {
 //     var actual = aocCode.Day1Part1("day1part1.txt")
-//     var expected = 0
+//     var expected = 1941353
 //     expect(actual).toBe(expected)
 //   })
 // })
@@ -21,7 +21,7 @@ import * as aocCode from "../src/aocIndex"
 //   })
 //   test('Real File (0 as placeholder)', () => {
 //     var actual = aocCode.Day1Part2("day1part2.txt")
-//     var expected = 0
+//     var expected = 22539317
 //     expect(actual).toBe(expected)
 //   })
 // })
@@ -47,7 +47,7 @@ import * as aocCode from "../src/aocIndex"
 //   })
 //   test('Real File (0 as placeholder)', () => {
 //     var actual = aocCode.Day2Part2("day2part2.txt")
-//     var expected = 0
+//     var expected = 381
 //     expect(actual).toBe(expected)
 //   })
 // })
@@ -58,11 +58,11 @@ describe('Day 3 - Part 1', () => {
     var expected = 161
     expect(actual).toBe(expected)
   })
-  // test('Real File (0 as placeholder)', () => {
-  //   var actual = aocCode.Day3Part1("day3part1.txt")
-  //   var expected = 0
-  //   expect(actual).toBe(expected)
-  // })
+  test('Real File (0 as placeholder)', () => {
+    var actual = aocCode.Day3Part1("day3part1.txt")
+    var expected = 159892596
+    expect(actual).toBe(expected)
+  })
 })
 
 describe('Day 3 - Part 2', () => {
@@ -71,9 +71,9 @@ describe('Day 3 - Part 2', () => {
     var expected = 48
     expect(actual).toBe(expected)
   })
-  // test('Real File (0 as placeholder)', () => {
-  //   var actual = aocCode.Day3Part2("day3part2.txt")
-  //   var expected = 0
-  //   expect(actual).toBe(expected)
-  // })
+  test('Real File (0 as placeholder)', () => {
+    var actual = aocCode.Day3Part2("day3part2.txt")
+    var expected = 92626942
+    expect(actual).toBe(expected)
+  })
 })

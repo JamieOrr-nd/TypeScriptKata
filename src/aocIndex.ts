@@ -135,75 +135,29 @@ export function Day3Part1(fileName: string): number {
     var total = 0;
     var inputPath = `./src/aocInputs/${fileName}`;
     var file = fs.readFileSync(inputPath, 'utf8').split("\n")
-
-    var start = true
-    var firstNumber = false
-    var comma = false
-    var secondNumber = false
-    var validMultiple = ""
-    var validMultiples: string[] = []
+    var completeString = ""
 
     file.forEach((line: string) => {
-        for (let i = 4; i < line.length; i++) {
-            // If we don't have any characters yet, the current character is numeric, and the previous 4 characters are "mul("
-            if (start && !isNaN(parseInt(line[i], 10)) && (line.slice(i - 4, i) == "mul(")) {
-                start = false
-                firstNumber = true
-                validMultiple += line[i]
-                continue
-            }
-            // If we have at least part of the first number, and the current character is numeric
-            if (firstNumber && !isNaN(parseInt(line[i], 10))) {
-                validMultiple += line[i]
-                continue
-            }
-            // If we have at least part of the first number, and the current character is a comma
-            if (firstNumber && line[i] == ",") {
-                firstNumber = false
-                comma = true
-                validMultiple += line[i]
-                continue
-            }
-            // If we have the comma, and the current character is numeric
-            if (comma && !isNaN(parseInt(line[i], 10))) {
-                comma = false
-                secondNumber = true
-                validMultiple += line[i]
-                continue
-            }
-            // If we have at least part of the second number, and the current character is numeric
-            if (secondNumber && !isNaN(parseInt(line[i], 10))) {
-                validMultiple += line[i]
-                continue
-            }
-            // If we have at least part of the second number, and the current character is ")"
-            if (secondNumber && line[i] == ")") {
-                secondNumber = false
-                start = true
-                validMultiples.push(validMultiple)
-                continue
-            }
-            // If none of the conditions are met, set the variables back to the defaults
-            start = true
-            firstNumber = false
-            comma = false
-            secondNumber = false
-            validMultiple = ""
-        }
+        completeString += line
     });
 
-    validMultiples.forEach((multiple: string) => {
-        var numbers: string[] = multiple.split(",")
-        var firstNumber = parseInt(numbers[0].trim(), 10)
-        var secondNumber = parseInt(numbers[1].trim(), 10)
+    var regexPattern = /mul\((\d|\d\d|\d\d\d),(\d|\d\d|\d\d\d)\)/g
+    var validMultiples = completeString.match(regexPattern)
 
-        if (!isNaN(firstNumber) && !isNaN(secondNumber)) {
-            total += (firstNumber * secondNumber)
-        }
-        else {
-            total += 0
-        }
-    })
+    if (validMultiples !== null) {
+        validMultiples.forEach((multiple: string) => {
+            var numbers: string[] = multiple.split(",")
+            var firstNumber = parseInt(numbers[0].slice(4), 10)
+            var secondNumber = parseInt(numbers[1].slice(0, -1), 10)
+
+            if (!isNaN(firstNumber) && !isNaN(secondNumber)) {
+                total += (firstNumber * secondNumber)
+            }
+            else {
+                total += 0
+            }
+        })
+    }
 
     return total
 }
@@ -212,91 +166,42 @@ export function Day3Part2(fileName: string): number {
     var total = 0;
     var inputPath = `./src/aocInputs/${fileName}`;
     var file = fs.readFileSync(inputPath, 'utf8').split("\n")
-
-    var doAllowed = true
-    var start = true
-    var firstNumber = false
-    var comma = false
-    var secondNumber = false
-    var validMultiple = ""
-    var validMultiples: string[] = []
+    var completeString = ""
 
     file.forEach((line: string) => {
-        for (let i = 4; i < line.length; i++) {
-            // If the last condition was 'do'
-            if (doAllowed) {
-                // If the last 7 characters are "don't()"
-                if ((line.slice(i - 6, i + 1) == "don't()")) {
-                    doAllowed = false
-                    continue
-                }
-                // If we don't have any characters yet, the current character is numeric, and the previous 4 characters are "mul("
-                if (start && !isNaN(parseInt(line[i], 10)) && (line.slice(i - 4, i) == "mul(")) {
-                    start = false
-                    firstNumber = true
-                    validMultiple += line[i]
-                    continue
-                }
-                // If we have at least part of the first number, and the current character is numeric
-                if (firstNumber && !isNaN(parseInt(line[i], 10))) {
-                    validMultiple += line[i]
-                    continue
-                }
-                // If we have at least part of the first number, and the current character is a comma
-                if (firstNumber && line[i] == ",") {
-                    firstNumber = false
-                    comma = true
-                    validMultiple += line[i]
-                    continue
-                }
-                // If we have the comma, and the current character is numeric
-                if (comma && !isNaN(parseInt(line[i], 10))) {
-                    comma = false
-                    secondNumber = true
-                    validMultiple += line[i]
-                    continue
-                }
-                // If we have at least part of the second number, and the current character is numeric
-                if (secondNumber && !isNaN(parseInt(line[i], 10))) {
-                    validMultiple += line[i]
-                    continue
-                }
-                // If we have at least part of the second number, and the current character is ")"
-                if (secondNumber && line[i] == ")") {
-                    secondNumber = false
-                    start = true
-                    validMultiples.push(validMultiple)
-                    continue
-                }
-                // If none of the conditions are met, set the variables back to the defaults
-                start = true
-                firstNumber = false
-                comma = false
-                secondNumber = false
-                validMultiple = ""
-            }
-            else {
-                // If the last condition was 'don't'
-                if ((line.slice(i - 3, i + 1) == "do()")) {
-                    doAllowed = true
-                    continue
-                }
-            }
-        }
+        completeString += line
     });
 
-    validMultiples.forEach((multiple: string) => {
-        var numbers: string[] = multiple.split(",")
-        var firstNumber = parseInt(numbers[0].trim(), 10)
-        var secondNumber = parseInt(numbers[1].trim(), 10)
+    var regexPattern = /(mul\((\d|\d\d|\d\d\d),(\d|\d\d|\d\d\d)\))|(do\(\)|don't\(\))/g
+    var validMultiples = completeString.match(regexPattern)
+    var doAllowed = true
 
-        if (!isNaN(firstNumber) && !isNaN(secondNumber)) {
-            total += (firstNumber * secondNumber)
-        }
-        else {
-            total += 0
-        }
-    })
+    if (validMultiples !== null) {
+        validMultiples.forEach((multiple: string) => {
+            if (doAllowed) {
+                if (multiple === "don't()") {
+                    doAllowed = false
+                }
+                else if (multiple !== "do()") {
+                    var numbers: string[] = multiple.split(",")
+                    var firstNumber = parseInt(numbers[0].slice(4), 10)
+                    var secondNumber = parseInt(numbers[1].slice(0, -1), 10)
+
+                    if (!isNaN(firstNumber) && !isNaN(secondNumber)) {
+                        total += (firstNumber * secondNumber)
+                    }
+                    else {
+                        total += 0
+                    }
+                }
+            }
+            else {
+                if (multiple === "do()") {
+                    doAllowed = true
+                }
+            }
+        })
+    }
 
     return total
 }
