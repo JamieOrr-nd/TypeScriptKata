@@ -58,9 +58,22 @@ describe('Day 3 - Part 1', () => {
     var expected = 161
     expect(actual).toBe(expected)
   })
-  test('Real File (0 as placeholder)', () => {
-    var actual = aocCode.Day3Part1("day3part1.txt")
-    var expected = 0
+  // test('Real File (0 as placeholder)', () => {
+  //   var actual = aocCode.Day3Part1("day3part1.txt")
+  //   var expected = 0
+  //   expect(actual).toBe(expected)
+  // })
+})
+
+describe('Day 3 - Part 2', () => {
+  test('Test File', () => {
+    var actual = aocCode.Day3Part2("day3part2test.txt")
+    var expected = 48
     expect(actual).toBe(expected)
   })
+  // test('Real File (0 as placeholder)', () => {
+  //   var actual = aocCode.Day3Part2("day3part2.txt")
+  //   var expected = 0
+  //   expect(actual).toBe(expected)
+  // })
 })
